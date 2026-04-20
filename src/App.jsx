@@ -35,11 +35,17 @@ function App() {
         formData.append('resume_text', resumeText);
       }
 
-      // Using a placeholder webhook endpoint. Replace with actual API.
-      const response = await fetch('https://hook.us1.make.com/placeholder-webhook-url', {
+      const response = await fetch('/api/webhook-test/generate-resume', {
         method: 'POST',
         body: formData,
       });
+
+      // Check if response is not ok OR if the content-type is json (which means it's an error message from n8n)
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const errData = await response.json();
+        throw new Error(errData.message || errData.error || 'Failed to generate resume. Please check the workflow.');
+      }
 
       if (!response.ok) {
         throw new Error('Failed to generate resume. Please try again.');
