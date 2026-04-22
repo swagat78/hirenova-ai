@@ -35,7 +35,7 @@ function App() {
         formData.append('resume_text', resumeText);
       }
 
-      const response = await fetch('http://localhost:5678/webhook-test/generate-resume', {
+      const response = await fetch('/api/webhook-test/generate-resume', {
         method: 'POST',
         body: formData,
       });
