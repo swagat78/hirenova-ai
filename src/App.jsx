@@ -35,7 +35,7 @@ function App() {
         formData.append('resume_text', resumeText);
       }
 
-      const response = await fetch('https://agency-sprout-parmesan.ngrok-free.app/webhook/generate-resume', {
+      const response = await fetch('http://54.144.42.4:5678/webhook/generate-resume', {
         method: 'POST',
         body: formData,
       });
