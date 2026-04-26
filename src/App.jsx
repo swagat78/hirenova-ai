@@ -40,24 +40,35 @@ function App() {
         body: formData,
       });
 
-      // Check if response is not ok OR if the content-type is json (which means it's an error message from n8n)
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        const errData = await response.json();
-        throw new Error(errData.message || errData.error || 'Failed to generate resume. Please check the workflow.');
-      }
-
       if (!response.ok) {
-        throw new Error('Failed to generate resume. Please try again.');
+        throw new Error('Failed to start the resume generation. Please try again.');
       }
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      setDownloadUrl(url);
+      // n8n responds instantly with the new Database Row ID!
+      const responseData = await response.json();
+      const jobId = responseData.job_id;
+
+      // Start Polling for the PDF URL
+      const pollInterval = setInterval(async () => {
+        try {
+          const statusRes = await fetch(`/api/webhook/status?job_id=${jobId}`);
+          if (statusRes.ok) {
+            const data = await statusRes.json();
+            
+            // Wait until the Supabase node updates the row to success
+            if (data.status === 'success' && data.pdf_url) {
+              clearInterval(pollInterval);
+              setDownloadUrl(data.pdf_url);
+              setIsGenerating(false); // Stop loading ONLY when PDF is ready
+            }
+          }
+        } catch (e) {
+          // Ignore network errors while polling
+        }
+      }, 5000); // Check every 5 seconds
 
     } catch (err) {
       setError(err.message || 'An unexpected error occurred.');
-    } finally {
       setIsGenerating(false);
     }
   };
