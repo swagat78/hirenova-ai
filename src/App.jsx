@@ -35,7 +35,7 @@ function App() {
         formData.append('resume_text', resumeText);
       }
 
-      const response = await fetch('/api/webhook/generate-resume', {
+      const response = await fetch('/api/webhook-test/generate-resume', {
         method: 'POST',
         body: formData,
       });
@@ -51,7 +51,7 @@ function App() {
       // Start Polling for the PDF URL
       const pollInterval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`/api/webhook/status?job_id=${jobId}`);
+          const statusRes = await fetch(`/api/webhook-test/status?job_id=${jobId}`);
           if (statusRes.ok) {
             const data = await statusRes.json();
             
