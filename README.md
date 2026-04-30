@@ -4,9 +4,9 @@ Hire Nova is a premium, AI-powered SaaS web application designed to instantly co
 
 ## Live Demo & Workflows
 - **Frontend Deployment:** [https://hirenova-ai.netlify.app/](https://hirenova-ai.netlify.app/)
-- **Backend Automation (n8n):** Hosted on AWS EC2 via Docker
-  - Main Generation Workflow: http://54.144.42.4:5678/workflow/lHMNQoyNbYqMiFRP
-  - Status Polling Workflow: http://54.144.42.4:5678/workflow/0yY8MwArCIihCCCq
+- **Backend Automation (n8n):** Hosted securely on AWS EC2 via Docker
+  - **Main Generation Workflow:** Processes raw text/PDFs, communicates with Gemini 1.5, and handles CloudConvert compilation.
+  - **Status Polling Workflow:** Interacts with Supabase to provide real-time status updates to the React frontend.
 
 ---
 
