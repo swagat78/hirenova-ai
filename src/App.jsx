@@ -98,7 +98,7 @@ CGPA: ${cgpa}
 
       // Fire and forget! We don't care if Netlify times out at 30 seconds, 
       // because n8n keeps working securely in the background for 2 minutes!
-      const response = await fetch('/api/webhook-test/generate-resume', {
+      const response = await fetch('/api/webhook/generate-resume', {
         method: 'POST',
         body: formData,
       });
@@ -114,7 +114,7 @@ CGPA: ${cgpa}
       // Start Polling for the PDF URL
       const pollInterval = setInterval(async () => {
         try {
-          const statusRes = await fetch(`/api/webhook-test/status?job_id=${jobId}`);
+          const statusRes = await fetch(`/api/webhook/status?job_id=${jobId}`);
           if (statusRes.ok) {
             const data = await statusRes.json();
 
