@@ -16,7 +16,7 @@ Hire Nova utilizes a highly decoupled, serverless-style architecture leveraging 
 
 - **Frontend:** React.js, Vite, Tailwind CSS, Lucide Icons (Dark Mode UI, Glassmorphism).
 - **Backend Orchestrator:** n8n (Self-hosted on AWS EC2 using Docker).
-- **AI Engine:** Google Gemini 1.5 Flash (via n8n API integration).
+- **AI Engine:** Google Gemini (via n8n API integration).
 - **Database & Storage:** Supabase (PostgreSQL for logging job states, Supabase Buckets for PDF storage).
 - **Document Engine:** CloudConvert API (Compiles generated LaTeX code into final PDF).
 - **Hosting:** Netlify (Frontend) with Vite proxy routing `/api/` to the AWS backend.
