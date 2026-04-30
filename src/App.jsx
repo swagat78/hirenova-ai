@@ -68,7 +68,8 @@ function App() {
       if (resumeInputType === 'upload' && resumeFile) {
         formData.append('resume_file', resumeFile);
       } else if (resumeInputType === 'text') {
-        formData.append('resume_text', resumeText);
+        const enrichedText = `Name: ${userName}\nEmail: ${userEmail}\n\n${resumeText}`;
+        formData.append('resume_text', enrichedText);
       } else if (resumeInputType === 'manual') {
         const manualData = `
 Personal Details:
@@ -309,12 +310,12 @@ CGPA: ${cgpa}
                         ) : (
                           <div>
                             <p className="text-sm font-semibold text-slate-300">Click to upload or drag and drop</p>
-                            <p className="text-xs font-medium text-slate-500 mt-1">PDF, DOC, DOCX up to 10MB</p>
+                            <p className="text-xs font-medium text-slate-500 mt-1">PDF files up to 10MB</p>
                           </div>
                         )}
                         <input
                           type="file"
-                          accept=".pdf,.doc,.docx"
+                          accept=".pdf"
                           onChange={handleFileChange}
                           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                           aria-label="Upload resume file"
