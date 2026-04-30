@@ -1,16 +1,16 @@
-# 🚀 Hire Nova - AI Resume Generator
+# Hire Nova - AI Resume Generator
 
 Hire Nova is a premium, AI-powered SaaS web application designed to instantly convert your raw job history or existing PDF resume into a beautifully formatted, ATS-optimized LaTeX PDF resume tailored specifically to a target Job Description.
 
-## 🌟 Live Demo & Workflows
-- **Frontend Deployment:** Hosted on Netlify
+## Live Demo & Workflows
+- **Frontend Deployment:** [https://hirenova-ai.netlify.app/](https://hirenova-ai.netlify.app/)
 - **Backend Automation (n8n):** Hosted on AWS EC2 via Docker
   - Main Generation Workflow: http://54.144.42.4:5678/workflow/lHMNQoyNbYqMiFRP
   - Status Polling Workflow: http://54.144.42.4:5678/workflow/0yY8MwArCIihCCCq
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack & Architecture
 
 Hire Nova utilizes a highly decoupled, serverless-style architecture leveraging modern web technologies and robust automation:
 
@@ -23,7 +23,7 @@ Hire Nova utilizes a highly decoupled, serverless-style architecture leveraging 
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 1. **User Input:** Users can upload an existing PDF resume, paste raw text, or build from scratch using the React UI. They also provide a target Job Description.
 2. **Webhook Trigger:** The React app submits a `multipart/form-data` request to the n8n backend.
@@ -34,24 +34,27 @@ Hire Nova utilizes a highly decoupled, serverless-style architecture leveraging 
 
 ---
 
-## ⚠️ Important Disclaimer
+## ⚠️ Important Disclaimer & Support
 
 **This application was built utilizing entirely FREE-TIER API Keys and Services.** 
 Because of this, you may occasionally experience rate limits, slow generation times, or temporary service errors (especially with CloudConvert or Gemini API usage limits). 
 
+If you encounter any persistent issues or bugs, please feel free to reach out to us at: **hirenovai@gmail.com**
+
 ---
 
-## 🔮 Future Work & Roadmap
+## Future Work & Roadmap
 
-We have massive plans to expand Hire Nova. Upcoming features include:
-- **More Resume Templates:** Expanding beyond the standard ATS format to include multiple visual LaTeX templates.
+We have massive plans to expand Hire Nova into a complete career platform. Upcoming features include:
+- **Smart Job Matching:** Automatically suggesting real-time job links that match the generated resume profile.
 - **Cover Letter Generation:** Automatically generating highly personalized cover letters matching the resume and job description.
-- **Speed Optimization:** Refactoring the backend workflow and upgrading API tiers to drastically reduce PDF generation time.
+- **Enterprise-Grade Optimization:** Upgrading the backend to handle massive parallel generation requests with enterprise-tier API speed and reliability.
+- **More Resume Templates:** Expanding beyond the standard ATS format to include multiple visual LaTeX templates.
 - **Improved Document Support:** Adding robust `.docx` parsing and extraction to handle a wider variety of uploaded file types.
 
 ---
 
-## 💻 Local Development
+## Local Development
 
 1. Clone the repository:
    ```bash
