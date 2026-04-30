@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Upload, FileText, File as FileIcon, Loader2, CheckCircle2, Download, RefreshCw, AlertCircle, Edit3, User, Mail, Calendar, MapPin, Phone, Link, GraduationCap, Award } from 'lucide-react';
+import { Upload, FileText, File as FileIcon, Loader2, CheckCircle2, Download, RefreshCw, AlertCircle, Edit3, User, Mail, Calendar, MapPin, Phone, Link, GraduationCap, Award, Maximize2, X } from 'lucide-react';
 
 function App() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [jobDescription, setJobDescription] = useState('');
+  const [isJdExpanded, setIsJdExpanded] = useState(false);
   const [resumeInputType, setResumeInputType] = useState('upload'); // 'upload', 'text', or 'manual'
   const [resumeText, setResumeText] = useState('');
   const [resumeFile, setResumeFile] = useState(null);
@@ -144,6 +145,35 @@ CGPA: ${cgpa}
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#050505] relative overflow-hidden selection:bg-fuchsia-500/30 selection:text-fuchsia-200">
+      
+      {/* JD Enlarge Modal */}
+      {isJdExpanded && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+          <div className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#1a1a1a]">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Maximize2 className="w-5 h-5 text-orange-400" />
+                Edit Job Description
+              </h2>
+              <button onClick={() => setIsJdExpanded(false)} className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <textarea
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              placeholder="Paste the full job description here..."
+              className="flex-1 w-full p-6 bg-transparent text-white text-base sm:text-lg focus:outline-none resize-none placeholder:text-slate-500 font-medium leading-relaxed"
+              autoFocus
+            />
+            <div className="p-4 border-t border-white/10 bg-[#1a1a1a] flex justify-end">
+              <button onClick={() => setIsJdExpanded(false)} className="px-6 py-2.5 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition-colors">
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Attractive Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-violet-600/20 blur-[120px] pointer-events-none"></div>
@@ -253,13 +283,25 @@ CGPA: ${cgpa}
 
               {/* Job Description Input */}
               <div className="space-y-4">
-                <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Job Description</h2>
-                <textarea
-                  value={jobDescription}
-                  onChange={(e) => setJobDescription(e.target.value)}
-                  placeholder="Paste job description..."
-                  className="w-full min-h-[120px] p-4 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none resize-y placeholder:text-slate-500 font-medium leading-relaxed"
-                />
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Job Description</h2>
+                </div>
+                <div className="relative group">
+                  <textarea
+                    value={jobDescription}
+                    onChange={(e) => setJobDescription(e.target.value)}
+                    placeholder="Paste job description..."
+                    className="w-full min-h-[120px] p-4 pr-12 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none resize-y placeholder:text-slate-500 font-medium leading-relaxed"
+                  />
+                  <button 
+                    onClick={() => setIsJdExpanded(true)}
+                    type="button"
+                    className="absolute top-3 right-3 p-1.5 bg-[#222] hover:bg-orange-500/20 text-slate-400 hover:text-orange-400 border border-white/10 rounded-md transition-colors opacity-0 group-hover:opacity-100"
+                    title="Enlarge editor"
+                  >
+                    <Maximize2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               {/* Resume Input Area */}
