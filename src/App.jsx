@@ -431,14 +431,14 @@ CGPA: ${cgpa}
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                               <Calendar className="h-4 w-4 text-slate-500" />
                             </div>
-                            <input type="text" value={startDate} onChange={(e) => setStartDate(e.target.value)} placeholder="Start Date (e.g., Aug 2020)" className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none placeholder:text-slate-500 font-medium" />
+                            <input type="month" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none font-medium" />
                           </div>
 
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                               <Calendar className="h-4 w-4 text-slate-500" />
                             </div>
-                            <input type="text" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="End Date (e.g., May 2024 or Present)" className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none placeholder:text-slate-500 font-medium" />
+                            <input type="month" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none font-medium" />
                           </div>
 
                           <div className="relative">
