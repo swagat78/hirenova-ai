@@ -8,7 +8,7 @@ function App() {
   const [resumeInputType, setResumeInputType] = useState('upload'); // 'upload', 'text', or 'manual'
   const [resumeText, setResumeText] = useState('');
   const [resumeFile, setResumeFile] = useState(null);
-  
+
   // Manual Entry States
   const [phone, setPhone] = useState('');
   const [github, setGithub] = useState('');
@@ -33,15 +33,15 @@ function App() {
   const isValidGithub = github.trim() === '' || github.toLowerCase().includes('github.com');
   const isValidLinkedin = linkedin.trim() === '' || linkedin.toLowerCase().includes('linkedin.com');
 
-  const manualFieldsFilled = 
-    phone.trim() !== '' && 
-    github.trim() !== '' && 
-    linkedin.trim() !== '' && 
-    college.trim() !== '' && 
-    collegeAddress.trim() !== '' && 
-    branch.trim() !== '' && 
-    cgpa.trim() !== '' && 
-    startDate.trim() !== '' && 
+  const manualFieldsFilled =
+    phone.trim() !== '' &&
+    github.trim() !== '' &&
+    linkedin.trim() !== '' &&
+    college.trim() !== '' &&
+    collegeAddress.trim() !== '' &&
+    branch.trim() !== '' &&
+    cgpa.trim() !== '' &&
+    startDate.trim() !== '' &&
     endDate.trim() !== '';
 
   const manualFieldsValid = manualFieldsFilled && isValidGithub && isValidLinkedin;
@@ -117,7 +117,7 @@ CGPA: ${cgpa}
           const statusRes = await fetch(`/api/webhook-test/status?job_id=${jobId}`);
           if (statusRes.ok) {
             const data = await statusRes.json();
-            
+
             // Wait until the Supabase node updates the row to success
             if (data.status === 'success' && data.pdf_url) {
               clearInterval(pollInterval);
@@ -144,11 +144,11 @@ CGPA: ${cgpa}
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#050505] relative overflow-hidden selection:bg-fuchsia-500/30 selection:text-fuchsia-200">
-      
+
       {/* Attractive Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-violet-600/20 blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-fuchsia-600/20 blur-[120px] pointer-events-none"></div>
-      
+
       <div className="w-full max-w-3xl bg-[#111111]/80 backdrop-blur-2xl rounded-3xl shadow-2xl ring-1 ring-white/10 overflow-hidden transition-all duration-300 relative z-10">
 
         {/* Header Section */}
@@ -264,7 +264,12 @@ CGPA: ${cgpa}
 
               {/* Resume Input Area */}
               <div className="space-y-4">
-                <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Your Content</h2>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0">
+                  <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Your Content</h2>
+                  <span className="text-xs font-medium text-fuchsia-400/90 bg-fuchsia-500/10 px-2 py-1 rounded-md border border-fuchsia-500/20 w-fit">
+                    For best results, use the Upload File tab
+                  </span>
+                </div>
 
                 <div className="rounded-2xl p-1.5 bg-[#1a1a1a] border border-white/5">
                   {/* Pill Tabs */}
@@ -341,7 +346,7 @@ CGPA: ${cgpa}
                           <p className="text-xs font-medium text-slate-400 mt-1.5 leading-relaxed">Fill in ALL these details to generate a stunning resume instantly. <span className="text-fuchsia-400">Every field is required.</span></p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                          
+
                           {/* Phone Number */}
                           <div className="relative col-span-1 sm:col-span-2">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -372,7 +377,7 @@ CGPA: ${cgpa}
                             </div>
                             <input type="text" value={college} onChange={(e) => setCollege(e.target.value)} placeholder="College / University Name" className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none placeholder:text-slate-500 font-medium" />
                           </div>
-                          
+
                           <div className="relative col-span-1 sm:col-span-2">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                               <MapPin className="h-4 w-4 text-slate-500" />
@@ -386,7 +391,7 @@ CGPA: ${cgpa}
                             </div>
                             <input type="text" value={startDate} onChange={(e) => setStartDate(e.target.value)} placeholder="Start Date (e.g., Aug 2020)" className="pl-10 w-full p-3.5 rounded-xl border border-white/10 bg-[#1a1a1a] text-white text-sm focus:bg-[#222] focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all outline-none placeholder:text-slate-500 font-medium" />
                           </div>
-                          
+
                           <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                               <Calendar className="h-4 w-4 text-slate-500" />
@@ -430,6 +435,11 @@ CGPA: ${cgpa}
             >
               Generate Resume
             </button>
+            <div className="text-center mt-4 relative z-10">
+              <p className="text-xs text-slate-500 font-medium">
+                Experiencing any issues? Email us at <a href="mailto:hirenovai@gmail.com" className="text-violet-400 hover:text-violet-300 transition-colors">hirenovai@gmail.com</a>
+              </p>
+            </div>
           </div>
         )}
 
