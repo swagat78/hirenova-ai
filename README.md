@@ -1,16 +1,69 @@
-# React + Vite
+# 🚀 Hire Nova - AI Resume Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hire Nova is a premium, AI-powered SaaS web application designed to instantly convert your raw job history or existing PDF resume into a beautifully formatted, ATS-optimized LaTeX PDF resume tailored specifically to a target Job Description.
 
-Currently, two official plugins are available:
+## 🌟 Live Demo & Workflows
+- **Frontend Deployment:** Hosted on Netlify
+- **Backend Automation (n8n):** Hosted on AWS EC2 via Docker
+  - Main Generation Workflow: http://54.144.42.4:5678/workflow/lHMNQoyNbYqMiFRP
+  - Status Polling Workflow: http://54.144.42.4:5678/workflow/0yY8MwArCIihCCCq
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ Tech Stack & Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Hire Nova utilizes a highly decoupled, serverless-style architecture leveraging modern web technologies and robust automation:
 
-## Expanding the ESLint configuration
+- **Frontend:** React.js, Vite, Tailwind CSS, Lucide Icons (Dark Mode UI, Glassmorphism).
+- **Backend Orchestrator:** n8n (Self-hosted on AWS EC2 using Docker).
+- **AI Engine:** Google Gemini 1.5 Flash (via n8n API integration).
+- **Database & Storage:** Supabase (PostgreSQL for logging job states, Supabase Buckets for PDF storage).
+- **Document Engine:** CloudConvert API (Compiles generated LaTeX code into final PDF).
+- **Hosting:** Netlify (Frontend) with Vite proxy routing `/api/` to the AWS backend.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⚙️ How It Works
+
+1. **User Input:** Users can upload an existing PDF resume, paste raw text, or build from scratch using the React UI. They also provide a target Job Description.
+2. **Webhook Trigger:** The React app submits a `multipart/form-data` request to the n8n backend.
+3. **AI Processing:** n8n extracts text from the PDF (if uploaded), structures it, and sends it to the Gemini 1.5 API alongside strict LaTeX formatting rules.
+4. **LaTeX Compilation:** The AI-generated LaTeX string is sent to CloudConvert to be rendered into a professional PDF.
+5. **Real-time Polling:** Supabase logs the initial job. The React frontend continuously polls the Supabase database via a secondary n8n webhook until the PDF compilation is complete.
+6. **Delivery:** The final PDF URL is presented to the user for download, and a copy is automatically emailed to their provided email address via SMTP.
+
+---
+
+## ⚠️ Important Disclaimer
+
+**This application was built utilizing entirely FREE-TIER API Keys and Services.** 
+Because of this, you may occasionally experience rate limits, slow generation times, or temporary service errors (especially with CloudConvert or Gemini API usage limits). 
+
+---
+
+## 🔮 Future Work & Roadmap
+
+We have massive plans to expand Hire Nova. Upcoming features include:
+- **More Resume Templates:** Expanding beyond the standard ATS format to include multiple visual LaTeX templates.
+- **Cover Letter Generation:** Automatically generating highly personalized cover letters matching the resume and job description.
+- **Speed Optimization:** Refactoring the backend workflow and upgrading API tiers to drastically reduce PDF generation time.
+- **Improved Document Support:** Adding robust `.docx` parsing and extraction to handle a wider variety of uploaded file types.
+
+---
+
+## 💻 Local Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/swagat78/hirenova-ai.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+*Note: You must have your n8n workflows active on your backend server for the generation to function locally.*
